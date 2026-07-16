@@ -41,30 +41,35 @@ points = np.array(list(zip(instance.points_x, instance.points_y)), dtype=float)
 boundary = np.array([points[i] for i in instance.region_boundary])
 boundary = np.append(boundary, [boundary[0]], axis=0)
 
-# Set dark mode theme
+# Thematic Color
+THEME_COLOR = '#2b2b2b'
+
 if ENABLE_PLOT:
-    plt.style.use('dark_background')
+    # White background by default (do not use dark_background)
     plt.figure(figsize=(9, 9))
     plt.title("Meslatt Logo Triangulation")
     
-    # Draw original boundary (White)
-    plt.plot(boundary[:, 0], boundary[:, 1], 'white', linewidth=2.0, label='Silhouette Boundary', zorder=10)
-    plt.scatter(points[:, 0], points[:, 1], color='lightsteelblue', label='Original Points', zorder=11)
+    # Draw original boundary
+    plt.plot(boundary[:, 0], boundary[:, 1], color=THEME_COLOR, linewidth=2.0, label='Silhouette Boundary', zorder=10)
+    
+    # Draw nodes, slightly smaller (s=15)
+    plt.scatter(points[:, 0], points[:, 1], color=THEME_COLOR, s=15, label='Original Points', zorder=11)
 
-    # Draw additional constraints (Red)
+    # Draw additional constraints
     for constraint in instance.additional_constraints:
         x_coords = [instance.points_x[constraint[0]], instance.points_x[constraint[1]]]
         y_coords = [instance.points_y[constraint[0]], instance.points_y[constraint[1]]]
-        plt.plot(x_coords, y_coords, 'red', linewidth=1.5, zorder=5)
+        plt.plot(x_coords, y_coords, color=THEME_COLOR, linewidth=1.5, zorder=5)
 
-    # Draw triangulation edges (Steelblue)
+    # Draw triangulation edges
     for edge in solution.edges:
         x_coords = [instance.points_x[edge[0]], instance.points_x[edge[1]]]
         y_coords = [instance.points_y[edge[0]], instance.points_y[edge[1]]]
-        plt.plot(x_coords, y_coords, 'steelblue', linewidth=0.8, alpha=0.7, zorder=1)
+        plt.plot(x_coords, y_coords, color=THEME_COLOR, linewidth=0.8, alpha=0.7, zorder=1)
 
-    plt.legend()
     plt.axis('equal')
+    # Remove axis borders and ticks for a cleaner logo look
+    plt.axis('off')
     plt.show()
 
 print("Guardando solucion maestra (edges)...")
