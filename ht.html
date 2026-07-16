@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Operaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .process-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+        }
+        .linea {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 200px;
+        }
+        .linea h3 {
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 16px;
+        }
+        .step {
+            border-width: 2px;
+            border-style: solid;
+            padding: 10px;
+            margin: 15px auto;
+            text-align: center;
+            font-size: 14px;
+            width: 140px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        /* Simbología ASME con CSS */
+        .operacion {
+            border-color: #4682B4;
+            background-color: #B0E0E6;
+            border-radius: 50%; /* Círculo */
+        }
+        .inspeccion {
+            border-color: #CD853F;
+            background-color: #FFDAB9;
+            width: 120px;
+            height: 120px;
+            /* Cuadrado */
+        }
+        .almacenamiento {
+            border-color: #9370DB;
+            background-color: #E6E6FA;
+            width: 140px;
+            height: 120px;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%); /* Simula cilindro */
+        }
+        .externo {
+            border-color: #696969;
+            background-color: #D3D3D3;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
+        }
+        .final {
+             border-color: #2E8B57;
+             background-color: #90EE90;
+             font-weight: bold;
+             border-radius: 50%;
+        }
+
+        /* Estilos para componentes anidados */
+        .componente-grupo {
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .componente-grupo:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="process-container">
+
+    <div class="linea">
+        <h3>⚙️ LÍNEA 1: COMPONENTES PLÁSTICOS</h3>
+        <div class="componente-grupo">
+            <div class="step operacion">Moldear Tapa<br/>(0.050 min)</div>
+            <div class="step operacion">Quitar Rebaba<br/>(0.060 min)</div>
+            <div class="step almacenamiento">Tapa en Espera</div>
+        </div>
+        <div class="componente-grupo">
+            <div class="step operacion">Moldear Cuerpo<br/>(0.050 min)</div>
+            <div class="step operacion">Quitar Rebaba<br/>(0.060 min)</div>
+            <div class="step almacenamiento">Cuerpo en Espera</div>
+        </div>
+        <div class="componente-grupo">
+            <div class="step operacion">Moldear Botón<br/>(0.040 min)</div>
+            <div class="step almacenamiento">Botón en Espera</div>
+        </div>
+        <div class="componente-grupo">
+            <div class="step operacion">Moldear Muela<br/>(0.040 min)</div>
+            <div class="step almacenamiento">Muela en Espera</div>
+        </div>
+    </div>
+
+    <div class="linea">
+        <h3>✒️ LÍNEA 2: REPUESTO</h3>
+        <div class="componente-grupo">
+            <div class="step operacion">Extruir Tubo<br/>(0.020 min)</div>
+            <div class="step operacion">Cortar Tubo<br/>(0.005 min)</div>
+            <div class="step operacion">Remachar Punta<br/>(0.020 min)</div>
+            <div class="step operacion">Llenar Tinta<br/>(0.030 min)</div>
+            <div class="step almacenamiento">Repuesto en Espera</div>
+        </div>
+        <h3>🚚 COMPONENTES EXTERNOS</h3>
+        <div class="componente-grupo">
+            <div class="step externo">Clip</div>
+            <div class="step externo">Resorte</div>
+        </div>
+    </div>
+
+    <div class="linea">
+        <h3>📦 LÍNEA 3: ENSAMBLE Y EMPAQUE</h3>
+        <div class="step operacion">1. Ensamblar Tapa, Botón y Muela<br/>(0.020 min)</div>
+        <div class="step operacion">2. Ensamblar Bolígrafo (Unir todo)<br/>(0.220 min)</div>
+        <div class="step inspeccion">Prueba de Calidad<br/>(0.070 min)</div>
+        <div class="step operacion">3. Empacar en Cajas<br/>(0.070 min)</div>
+        <div class="step almacenamiento">Producto Terminado</div>
+        <div class="step final">FIN</div>
+    </div>
+
+</div>
+
+</body>
+</html>
