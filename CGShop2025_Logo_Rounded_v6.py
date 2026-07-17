@@ -82,7 +82,7 @@ points = np.array(list(zip(instance.points_x, instance.points_y)), dtype=float)
 boundary = np.array([points[i] for i in instance.region_boundary])
 boundary = np.append(boundary, [boundary[0]], axis=0)
 
-THEME_COLOR = '#303F9F' # Indigo vibrante y amigable
+THEME_COLOR = '#0070DF' # Color solicitado por el usuario
 LINE_THICKNESS = 4.0
 
 if ENABLE_PLOT:
@@ -117,6 +117,11 @@ if ENABLE_PLOT:
 
     plt.axis('equal')
     plt.axis('off')
+    
+    # Exportar el vector SVG automaticamente
+    plt.savefig("meslatt_logo_final.svg", format="svg", transparent=True, bbox_inches='tight')
+    print("Logotipo guardado como vector en 'meslatt_logo_final.svg'")
+    
     plt.show()
 
 print("Proceso terminado.")
