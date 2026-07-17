@@ -39,7 +39,7 @@ steiner_indices = list(all_indices - required_indices)
 
 # 3. Eliminar nodos Steiner aleatoriamente
 random.seed(42) # Semilla fija para consistencia visual
-DROP_PERCENTAGE = 0.35 # Eliminar solo el 35% de los nodos internos (menos que antes)
+DROP_PERCENTAGE = 1.0 # Eliminar el 100% de los nodos internos para que quede ultra limpio
 num_to_drop = int(len(steiner_indices) * DROP_PERCENTAGE)
 dropped_indices = set(random.sample(steiner_indices, num_to_drop))
 
