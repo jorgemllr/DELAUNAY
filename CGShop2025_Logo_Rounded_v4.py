@@ -28,9 +28,22 @@ orig_pts_y = data["points_y"]
 orig_boundary = data["region_boundary"]
 orig_constraints = data["additional_constraints"]
 
-# 2. Identificar nodos esenciales vs nodos Steiner (internos)
-required_indices = set(orig_boundary)
+# 2. Identificar y limpiar restricciones internas en la trompa
+# Para quitar densidad en la trompa (X alto), ignoraremos algunas de las lineas internas que dibujaste ahi.
+# Al ignorarlas, sus puntos se vuelven "Steiner" y seran eliminados.
+filtered_constraints = []
 for c in orig_constraints:
+    x1, x2 = orig_pts_x[c[0]], orig_pts_x[c[1]]
+    # Si la linea esta en la trompa (X > 600), la eliminamos con 80% de probabilidad
+    if x1 > 600 and x2 > 600:
+        if random.random() > 0.8: # Solo conserva el 20%
+            filtered_constraints.append(c)
+    else:
+        filtered_constraints.append(c)
+
+# 2.1 Identificar nodos esenciales vs nodos Steiner (internos)
+required_indices = set(orig_boundary)
+for c in filtered_constraints:
     required_indices.add(c[0])
     required_indices.add(c[1])
 
@@ -53,7 +66,7 @@ old_to_new = {old: new for new, old in enumerate(keep_indices)}
 new_pts_x = [orig_pts_x[i] for i in keep_indices]
 new_pts_y = [orig_pts_y[i] for i in keep_indices]
 new_boundary = [old_to_new[i] for i in orig_boundary]
-new_constraints = [[old_to_new[c[0]], old_to_new[c[1]]] for c in orig_constraints]
+new_constraints = [[old_to_new[c[0]], old_to_new[c[1]]] for c in filtered_constraints]
 
 print(f"Instancia Original: {len(orig_pts_x)} puntos.")
 print(f"Instancia Limpia (v4): {len(new_pts_x)} puntos. (Eliminados {num_to_drop} nodos Steiner).")
