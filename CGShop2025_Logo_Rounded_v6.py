@@ -87,7 +87,7 @@ LINE_THICKNESS = 4.0
 
 if ENABLE_PLOT:
     plt.figure(figsize=(9, 9))
-    plt.title("Meslatt Logo - Soft Geometry (v6 No Nodes)")
+    # Se elimino el plt.title() para que el vector SVG salga perfectamente limpio sin texto
     
     line_kwargs = {
         'color': THEME_COLOR,
